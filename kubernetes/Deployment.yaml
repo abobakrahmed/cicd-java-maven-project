@@ -4,7 +4,7 @@ metadata:
   labels:
     app: cicd-java-maven
   name: cicd-java-maven
-  namespace: cicd-java-maven
+  namespace: cicd-java-maven-staging
 spec:
   replicas: 1
   selector:
