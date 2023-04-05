@@ -4,7 +4,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "nginx"
   name: cicd-java-maven
-  namespace: cicd-java-maven
+  namespace: cicd-java-maven-staging
 spec:
   rules:
     - host: exmaple-test.com
