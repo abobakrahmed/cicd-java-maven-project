@@ -3,7 +3,7 @@ pipeline {
   agent any
 
   environment {
-    DOCKERHUB_CREDENTIALS=credentials('TestDocker') // Create a credentials in jenkins using your dockerhub username and token from https://hub.docker.com/settings/security
+    DOCKERHUB_CREDENTIALS=credentials('dockerhub') // Create a credentials in jenkins using your dockerhub username and token from https://hub.docker.com/settings/security
   }
 
 
@@ -12,7 +12,7 @@ pipeline {
     stage("Git Checkout") {
       steps {
         script {
-           sh "git clone https://github.com/DashrathMundkar/cicd-java-maven-project.git"
+           sh "git clone https://github.com/abobakrahmed/cicd-java-maven-project.git"
         }
       }
     }
@@ -28,7 +28,7 @@ pipeline {
    stage("Run SonarQube Analysis") {
       steps {
         script {
-          withSonarQubeEnv('YOUR_SonarQube_INSTALLATION_NAME') {
+          withSonarQubeEnv('cicd-maven') {
            sh 'mvn clean package sonar:sonar -Dsonar.profile="Sonar way"'
           }
           try {
@@ -67,7 +67,7 @@ pipeline {
     always {
       script {
         if (currentBuild.currentResult == 'FAILURE') {
-          step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: "Test@test.com", sendToIndividuals: true])
+          step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: "bakkorahmed5@gmail.com", sendToIndividuals: true])
         }
       }
     }
