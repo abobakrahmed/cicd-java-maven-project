@@ -4,7 +4,7 @@ metadata:
   labels:
     name: cicd-java-maven
   name: cicd-java-maven
-  namespace: cicd-java-maven
+  namespace: cicd-java-maven-staging
 spec:
   ports:
     - name: cicd-java-maven
