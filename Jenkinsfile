@@ -35,7 +35,7 @@ spec:
     stage("Maven Build") {
       steps {
         script {
-          sh "mvn clean install -T 1C" // -T 1C is to make build faster using multithreading
+          sh "cd cicd-java-maven-project && mvn clean install -T 1C" // -T 1C is to make build faster using multithreading
         }
       }
     }
@@ -78,13 +78,13 @@ spec:
       }
     }
   }
-  post {
-    always {
-      script {
-        if (currentBuild.currentResult == 'FAILURE') {
-          step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: "bakkorahmed5@gmail.com", sendToIndividuals: true])
-        }
-      }
-    }
-  }
+//   post {
+//     always {
+//       script {
+//         if (currentBuild.currentResult == 'FAILURE') {
+//           step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: "bakkorahmed5@gmail.com", sendToIndividuals: true])
+//         }
+//       }
+//     }
+//   }
 }
