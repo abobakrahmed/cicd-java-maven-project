@@ -12,7 +12,7 @@ spec:
   containers:
   - name: maven
     image: jenkins/jnlp-agent-maven:latest
-    command: ["sleep", "10000"]
+    command: ["sleep", "100000"]
 '''
         }
   }
@@ -35,7 +35,7 @@ spec:
     stage("Maven Build") {
       steps {
         script {
-          sh "mvn clean install" // -T 1C is to make build faster using multithreading
+          sh "mvn clean install -T 1C" // -T 1C is to make build faster using multithreading
         }
       }
     }
