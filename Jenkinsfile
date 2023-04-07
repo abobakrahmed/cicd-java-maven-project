@@ -14,7 +14,8 @@ spec:
     image: jenkins/jnlp-agent-maven:latest
     command: ["sleep", "10000"]
 '''
-  
+        }
+  }
 
   environment {
     DOCKERHUB_CREDENTIALS=credentials('dockerhub') // Create a credentials in jenkins using your dockerhub username and token from https://hub.docker.com/settings/security
