@@ -1,10 +1,19 @@
 pipeline {
 
   agent {
-      kubernetes {
-          inheritFrom 'maven'
-    }
-  }
+        kubernetes {
+            yaml '''
+apiVersion: v1
+kind: Pod
+metadata:
+  name: maven-staging
+  namespace: jenkins-new
+spec:
+  containers:
+  - name: maven
+    image: jenkins/jnlp-agent-maven:latest
+    command: ["sleep", "10000"]
+'''
   
 
   environment {
