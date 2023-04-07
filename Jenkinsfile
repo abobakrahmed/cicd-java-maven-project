@@ -1,22 +1,26 @@
 pipeline {
 
+//   agent {
+//         kubernetes {
+//             yaml '''
+// apiVersion: v1
+// kind: Pod
+// metadata:
+//   name: maven-staging
+//   namespace: jenkins-new
+// spec:
+//   containers:
+//   - name: maven
+//     image: jenkins/jnlp-agent-maven:latest
+//     command: ["sleep", "100000"]
+// '''
+//         }
+//   }
   agent {
-        kubernetes {
-            yaml '''
-apiVersion: v1
-kind: Pod
-metadata:
-  name: maven-staging
-  namespace: jenkins-new
-spec:
-  containers:
-  - name: maven
-    image: jenkins/jnlp-agent-maven:latest
-    command: ["sleep", "100000"]
-'''
-        }
+      kubernetes {
+          inheritFrom 'maven'
+      }
   }
-
   environment {
     DOCKERHUB_CREDENTIALS=credentials('dockerhub') // Create a credentials in jenkins using your dockerhub username and token from https://hub.docker.com/settings/security
   }
@@ -35,7 +39,7 @@ spec:
     stage("Maven Build") {
       steps {
         script {
-          sh "cd /home/jenkins/agent/workspace/staging/cicd-java-maven-project && mvn clean install -T 1C" // -T 1C is to make build faster using multithreading
+          sh "mvn clean install -T 1C" // -T 1C is to make build faster using multithreading
         }
       }
     }
