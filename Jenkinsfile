@@ -27,7 +27,7 @@ spec:
     stage("Git Checkout") {
       steps {
         script {
-           sh "git clone https://github.com/abobakrahmed/cicd-java-maven-project.git"
+           sh "git clone https://github.com/abobakrahmed/cicd-java-maven-project.git && pwd"
         }
       }
     }
