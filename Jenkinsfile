@@ -35,7 +35,7 @@ spec:
     stage("Maven Build") {
       steps {
         script {
-          sh "cd cicd-java-maven-project && mvn clean install -T 1C" // -T 1C is to make build faster using multithreading
+          sh "mvn clean install" // -T 1C is to make build faster using multithreading
         }
       }
     }
