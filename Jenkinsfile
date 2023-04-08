@@ -1,24 +1,28 @@
 pipeline {
-//      agent any
-  agent {
-        kubernetes {
-            yaml '''
-apiVersion: v1
-kind: Pod
-metadata:
-  name: maven-staging
-  namespace: jenkins-new
-spec:
-  securityContext:
-    runAsUser: 0
-    runAsGroup: 0
-  containers:
-  - name: maven
-    image: jenkins/jnlp-agent-maven:latest
-    command: ["sleep", "10000000"]
-'''
-        }
-  }
+     agent any
+     tools { 
+        maven 'Maven 3.6.3'
+     }
+     
+//   agent {
+//         kubernetes {
+//             yaml '''
+// apiVersion: v1
+// kind: Pod
+// metadata:
+//   name: maven-staging
+//   namespace: jenkins-new
+// spec:
+//   securityContext:
+//     runAsUser: 0
+//     runAsGroup: 0
+//   containers:
+//   - name: maven
+//     image: jenkins/jnlp-agent-maven:latest
+//     command: ["sleep", "10000000"]
+// '''
+//         }
+//   }
 //   agent {
 //       kubernetes {
 //           inheritFrom 'maven'
