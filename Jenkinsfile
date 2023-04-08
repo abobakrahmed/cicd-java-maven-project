@@ -29,18 +29,18 @@ spec:
 
     stage("Git Checkout") {
       steps {
-//         script {
+        script {
            sh "git clone https://github.com/abobakrahmed/cicd-java-maven-project.git"
         }
-//       }
+      }
     }
 
     stage("Maven Build") {
       steps {   
-        script {
+//         script {
           sh "mvn clean install -T 1C" // -T 1C is to make build faster using multithreading
         }
-      }
+//       }
     }
 
    stage("Run SonarQube Analysis") {
