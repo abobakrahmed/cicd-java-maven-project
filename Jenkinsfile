@@ -14,8 +14,8 @@ pipeline {
 //     image: jenkins/jnlp-agent-maven:latest
 //     command: ["sleep", "100000"]
 // '''
-        }
-  }
+//         }
+//   }
 //   agent {
 //       kubernetes {
 //           inheritFrom 'maven'
