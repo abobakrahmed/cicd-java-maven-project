@@ -50,6 +50,7 @@ spec:
    stage("Run SonarQube Analysis") {
       steps {
         container ('maven') {
+          script {
           withSonarQubeEnv('Sonarqube') {
            sh 'mvn clean package sonar:sonar -Dsonar.profile="Sonar way"'
           }
@@ -66,6 +67,7 @@ spec:
         }
       }
     }
+  }
 
     stage("Build & Push Docker Image") {
       steps {
