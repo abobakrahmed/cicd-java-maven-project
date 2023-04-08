@@ -38,7 +38,7 @@ spec:
     stage("Maven Build") {
       steps {   
         script {
-          sh "ls /usr/share && mvn clean install -T 1C" // -T 1C is to make build faster using multithreading
+          sh "/usr/share/maven clean install -T 1C" // -T 1C is to make build faster using multithreading
         }
       }
     }
