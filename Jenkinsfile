@@ -25,10 +25,6 @@ spec:
     DOCKERHUB_CREDENTIALS=credentials('dockerhub') // Create a credentials in jenkins using your dockerhub username and token from https://hub.docker.com/settings/security
   }
 
-  tools { 
-      maven 'MAVEN_HOME' 
-      jdk 'JAVA_HOME' 
-    }
   stages {
 
     stage("Git Checkout") {
@@ -42,7 +38,7 @@ spec:
     stage("Maven Build") {
       steps {
         script {
-          sh "mvn clean install -T 1C" // -T 1C is to make build faster using multithreading
+          sh "${mvnHome}/bin/mvn clean install -T 1C" // -T 1C is to make build faster using multithreading
         }
       }
     }
