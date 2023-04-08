@@ -11,12 +11,13 @@ metadata:
   namespace: jenkins-new
 spec:
   securityContext:
-    allowPrivilegeEscalation: false
     runAsUser: 0
   containers:
   - name: maven
     image: jenkins/jnlp-agent-maven:latest
     command: ["sleep", "100000"]
+    securityContext:
+      allowPrivilegeEscalation: false
 '''
         }
   }
