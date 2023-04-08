@@ -1,5 +1,5 @@
 pipeline {
-     agent any
+//      agent any
 //   agent {
 //         kubernetes {
 //             yaml '''
@@ -16,11 +16,11 @@ pipeline {
 // '''
 //         }
 //   }
-//   agent {
-//       kubernetes {
-//           inheritFrom 'maven'
-//       }
-//   }
+  agent {
+      kubernetes {
+          inheritFrom 'maven'
+      }
+  }
   environment {
     DOCKERHUB_CREDENTIALS=credentials('dockerhub') // Create a credentials in jenkins using your dockerhub username and token from https://hub.docker.com/settings/security
   }
