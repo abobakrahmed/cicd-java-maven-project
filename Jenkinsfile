@@ -16,6 +16,9 @@ spec:
 '''
         }
   }
+  tools {
+    maven 'maven-3.6.3' 
+  }
 //   agent {
 //       kubernetes {
 //           inheritFrom 'maven'
@@ -38,7 +41,7 @@ spec:
     stage("Maven Build") {
       steps {   
         script {
-          sh "/usr/share/maven clean install -T 1C" // -T 1C is to make build faster using multithreading
+          sh "mvn clean install -T 1C" // -T 1C is to make build faster using multithreading
         }
       }
     }
