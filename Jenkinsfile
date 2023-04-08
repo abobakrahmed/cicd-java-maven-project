@@ -34,24 +34,19 @@ spec:
 
     stage("Git Checkout") {
       steps {
-        container ('maven') {
-           sh '''
-               git clone https://github.com/abobakrahmed/cicd-java-maven-project.git
-               cd cicd-java-maven-project 
-               mvn clean install -T 1C
-           '''             
+        script {
+           sh "git clone https://github.com/abobakrahmed/cicd-java-maven-project.git"            
         }
       }
     }
 
-//     stage("Maven Build") {
-//       steps {   
-//         script {
-//           sh " mvn clean install -T 1C"
-//           '''// -T 1C is to make build faster using multithreading
-//         }
-//       }
-//     }
+    stage("Maven Build") {
+      steps {   
+        container ('maven') {
+          sh "mvn clean install -T 1C" // -T 1C is to make build faster using multithreading
+        }
+      }
+    }
 
    stage("Run SonarQube Analysis") {
       steps {
