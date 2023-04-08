@@ -30,7 +30,7 @@ spec:
     stage("Git Checkout") {
       steps {
         script {
-           sh "git clone https://github.com/abobakrahmed/cicd-java-maven-project.git && pwd"
+           sh "git clone https://github.com/abobakrahmed/cicd-java-maven-project.git"
         }
       }
     }
@@ -38,7 +38,7 @@ spec:
     stage("Maven Build") {
       steps {   
         script {
-          sh "/home/jenkins/agent/workspace/staging/cicd-java-maven-project & mvn clean install -T 1C" // -T 1C is to make build faster using multithreading
+          sh "/home/jenkins/agent/workspace/staging/cicd-java-maven-project && sudo mvn clean install -T 1C" // -T 1C is to make build faster using multithreading
         }
       }
     }
