@@ -34,7 +34,7 @@ spec:
 
     stage("Git Checkout") {
       steps {
-        script {
+        container ('maven') {
            sh '''
                git clone https://github.com/abobakrahmed/cicd-java-maven-project.git
                cd cicd-java-maven-project 
