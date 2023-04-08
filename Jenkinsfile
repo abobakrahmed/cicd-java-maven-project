@@ -11,8 +11,8 @@ metadata:
 spec:
   containers:
   - name: maven
-    image: maven:3.9.0-eclipse-temurin-11
-    command: ["sleep", "100000"]
+    image: jenkins/jnlp-agent-maven:latest
+    command: ["sleep", "10000000"]
 '''
         }
   }
@@ -38,7 +38,7 @@ spec:
     stage("Maven Build") {
       steps {   
         script {
-          sh "/user/share/maven -B -DskipTests clean package" // -T 1C is to make build faster using multithreading
+          sh "pwd /usr/share && mvn clean install -T 1C" // -T 1C is to make build faster using multithreading
         }
       }
     }
