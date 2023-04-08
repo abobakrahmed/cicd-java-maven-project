@@ -43,7 +43,7 @@ spec:
       steps {   
         script {
           sh '''
-          cd /home/jenkins/agent/workspace/staging/cicd-java-maven-project
+          id
           mvn clean install -T 1C
           '''// -T 1C is to make build faster using multithreading
         }
