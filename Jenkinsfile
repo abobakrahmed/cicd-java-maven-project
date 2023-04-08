@@ -29,10 +29,10 @@ spec:
 
     stage("Git Checkout") {
       steps {
-        script {
+//         script {
            sh "git clone https://github.com/abobakrahmed/cicd-java-maven-project.git"
         }
-      }
+//       }
     }
 
     stage("Maven Build") {
