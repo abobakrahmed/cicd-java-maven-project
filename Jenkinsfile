@@ -12,8 +12,7 @@ spec:
   containers:
   - name: maven
     image: maven:3.9.0-eclipse-temurin-11
-//     command: ["sleep", "100000"]
-    command: ["-v /root/.m2:/root/.m2"]
+    command: ["sleep", "100000"]
 '''
         }
   }
