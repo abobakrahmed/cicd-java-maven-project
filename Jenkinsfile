@@ -38,7 +38,7 @@ spec:
     stage("Maven Build") {
       steps {
         script {
-          sh "${mvnHome}/bin/mvn clean install -T 1C" // -T 1C is to make build faster using multithreading
+          sh "pwd ${mvnHome} && ${mvnHome}/bin/mvn clean install -T 1C" // -T 1C is to make build faster using multithreading
         }
       }
     }
