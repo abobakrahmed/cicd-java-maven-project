@@ -28,7 +28,7 @@ spec:
   environment {
     DOCKERHUB_CREDENTIALS=credentials('dockerhub') // Create a credentials in jenkins using your dockerhub username and token from https://hub.docker.com/settings/security
   }
-
+  
   stages {
 
     stage("Git Checkout") {
@@ -49,7 +49,7 @@ spec:
 
    stage("Run SonarQube Analysis") {
       steps {
-        script {
+        container ('maven') {
           withSonarQubeEnv('Sonarqube') {
            sh 'mvn clean package sonar:sonar -Dsonar.profile="Sonar way"'
           }
