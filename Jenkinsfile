@@ -25,7 +25,10 @@ spec:
     DOCKERHUB_CREDENTIALS=credentials('dockerhub') // Create a credentials in jenkins using your dockerhub username and token from https://hub.docker.com/settings/security
   }
 
-
+  tools { 
+      maven 'MAVEN_HOME' 
+      jdk 'JAVA_HOME' 
+    }
   stages {
 
     stage("Git Checkout") {
