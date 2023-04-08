@@ -16,9 +16,6 @@ spec:
 '''
         }
   }
-  tools {
-    maven 'maven-3.6.3' 
-  }
 //   agent {
 //       kubernetes {
 //           inheritFrom 'maven'
@@ -33,7 +30,7 @@ spec:
     stage("Git Checkout") {
       steps {
         script {
-           sh "git clone https://github.com/abobakrahmed/cicd-java-maven-project.git"
+           sh "git clone https://github.com/abobakrahmed/cicd-java-maven-project.git && pwd"
         }
       }
     }
