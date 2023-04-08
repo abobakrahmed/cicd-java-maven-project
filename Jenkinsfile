@@ -39,7 +39,7 @@ spec:
     stage("Maven Build") {
       steps {   
         script {
-          sh "mvn -B -DskipTests clean package" // -T 1C is to make build faster using multithreading
+          sh "/user/share/maven -B -DskipTests clean package" // -T 1C is to make build faster using multithreading
         }
       }
     }
