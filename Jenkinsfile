@@ -1,19 +1,19 @@
 pipeline {
-
-  agent {
-        kubernetes {
-            yaml '''
-apiVersion: v1
-kind: Pod
-metadata:
-  name: maven-staging
-  namespace: jenkins-new
-spec:
-  containers:
-  - name: maven
-    image: jenkins/jnlp-agent-maven:latest
-    command: ["sleep", "100000"]
-'''
+     agent any
+//   agent {
+//         kubernetes {
+//             yaml '''
+// apiVersion: v1
+// kind: Pod
+// metadata:
+//   name: maven-staging
+//   namespace: jenkins-new
+// spec:
+//   containers:
+//   - name: maven
+//     image: jenkins/jnlp-agent-maven:latest
+//     command: ["sleep", "100000"]
+// '''
         }
   }
 //   agent {
@@ -38,7 +38,7 @@ spec:
     stage("Maven Build") {
       steps {
         script {
-          sh "pwd ${mvnHome} && ${mvnHome}/bin/mvn clean install -T 1C" // -T 1C is to make build faster using multithreading
+          sh "mvn clean install -T 1C" // -T 1C is to make build faster using multithreading
         }
       }
     }
