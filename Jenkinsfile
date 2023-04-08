@@ -1,5 +1,4 @@
 pipeline {
-//      agent any
      
   agent {
         kubernetes {
@@ -51,7 +50,7 @@ spec:
    stage("Run SonarQube Analysis") {
       steps {
         script {
-          withSonarQubeEnv('cicd-maven') {
+          withSonarQubeEnv('Sonarqube') {
            sh 'mvn clean package sonar:sonar -Dsonar.profile="Sonar way"'
           }
           try {
