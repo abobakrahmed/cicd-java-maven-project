@@ -9,6 +9,9 @@ metadata:
   name: maven-staging
   namespace: jenkins-new
 spec:
+  securityContext:
+    runAsUser: 0
+    runAsGroup: 0
   containers:
   - name: maven
     image: jenkins/jnlp-agent-maven:latest
@@ -39,7 +42,6 @@ spec:
       steps {   
         script {
           sh '''
-          chown jenkins:jenkins /usr/share/maven
           cd /home/jenkins/agent/workspace/staging/cicd-java-maven-project
           mvn clean install -T 1C
           '''// -T 1C is to make build faster using multithreading
