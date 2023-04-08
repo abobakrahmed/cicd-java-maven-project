@@ -51,7 +51,7 @@ spec:
       steps {
         container ('maven') {
           script {
-          withSonarQubeEnv('Sonarqube') {
+          withSonarQubeEnv(credentialsId: 'Sonarqube', installationName: 'Sonarqube') {
            sh 'mvn clean package sonar:sonar -Dsonar.profile="Sonar way"'
           }
           try {
