@@ -37,10 +37,10 @@ spec:
 
     stage("Maven Build") {
       steps {   
-//         script {
-          sh "mvn clean install -T 1C" // -T 1C is to make build faster using multithreading
+        script {
+          sh "mvn -B -DskipTests clean package" // -T 1C is to make build faster using multithreading
         }
-//       }
+      }
     }
 
    stage("Run SonarQube Analysis") {
