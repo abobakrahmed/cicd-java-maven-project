@@ -2,7 +2,7 @@ pipeline {
      
   agent {
       kubernetes {
-          inheritFrom 'maven'
+          inheritFrom 'default'
       }
   }
   environment {
