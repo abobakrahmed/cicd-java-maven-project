@@ -19,7 +19,7 @@ spec:
       allowPrivilegeEscalation: false
   - name: docker
     image: docker:latest
-    command: ["sleep", "100000"
+    command: ["sleep", "100000"]
 '''
         }
   }
