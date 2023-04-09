@@ -9,7 +9,7 @@ pipeline {
 
     stage("Git Checkout") {
       steps {
-        container ("jnlp") {
+        container ("default") {
            sh "git clone https://github.com/abobakrahmed/cicd-java-maven-project.git"            
         }
       }
@@ -17,7 +17,7 @@ pipeline {
 
     stage("Maven Build") {
       steps {   
-        container ("jnlp") {
+        container ("default") {
           sh "mvn clean install -T 1C" // -T 1C is to make build faster using multithreading
         }
       }
