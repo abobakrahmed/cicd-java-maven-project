@@ -48,26 +48,26 @@ spec:
       }
     }
 
-   stage("Run SonarQube Analysis") {
-      steps {
-        container ('maven') {
-          script {
-          withSonarQubeEnv('Sonarqube') {
-           sh 'mvn clean package sonar:sonar -Dsonar.profile="Sonar way -Dsonar.host.url=http://3.127.136.150:9000 --Dsonar.projectKey=cicd-maven-staging"'
+    stage("Run SonarQube Analysis") {
+       steps {
+         container ('maven') {
+           script {
+           withSonarQubeEnv('Sonarqube') {
+            sh 'mvn clean package sonar:sonar -Dsonar.profile="Sonar way -Dsonar.host.url=http://3.127.136.150:9000 --Dsonar.projectKey=cicd-maven-staging"'
                 }
               }
            }
         }
-     }
+    }
        
     stage("Quality Gate") {
           timeout(time: 10, unit: 'MINS') {
               def qg = waitForQualityGate()
               if (qg.status != 'OK') {
                   error "Pipeline aborted due to quality gate failure: ${qg.status}"
-              }
-          }
-      }   
+            }
+        }
+    }   
 
     stage("Build & Push Docker Image") {
       steps {
