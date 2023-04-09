@@ -17,8 +17,6 @@ spec:
     command: ["sleep", "100000"]
     securityContext:
       allowPrivilegeEscalation: false
-  - name: kaniko
-    image: gcr.io/kaniko-project/executor:v1.6.0-debug
 '''
         }
   }
@@ -72,7 +70,7 @@ spec:
 
     stage("Build & Push Docker Image") {
       steps {
-        container ('kaniko') {
+        container ('jnlp') {
           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'   
           sh "docker build -t abobakr/cicd-java-maven ."
           sh "docker push abobakr/cicd-java-maven"
