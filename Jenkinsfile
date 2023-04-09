@@ -54,21 +54,19 @@ spec:
           script {
           withSonarQubeEnv('Sonarqube') {
            sh 'mvn clean package sonar:sonar -Dsonar.profile="Sonar way -Dsonar.host.url=http://3.127.136.150:9000 --Dsonar.projectKey=cicd-maven-staging"'
-          }
-          try {
-            timeout(time: 5, unit: 'MINUTES') { // pipeline will be killed after a timeout
+                }
+              }
+           }
+        }
+     }
+     stage("Quality Gate"){
+          timeout(time: 10, unit: 'MINS') {
               def qg = waitForQualityGate()
               if (qg.status != 'OK') {
-                error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                  error "Pipeline aborted due to quality gate failure: ${qg.status}"
               }
-            }
-          } catch (e) {
-            throw e
           }
-        }
-      }
-    }
-  }
+      }   
 
     stage("Build & Push Docker Image") {
       steps {
