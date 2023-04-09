@@ -13,7 +13,7 @@ spec:
     runAsUser: 0
   containers:
   - name: maven
-    image: jenkins/jnlp-agent-maven:latest
+    image: jenkins/jnlp-slave:latest
     command: ["sleep", "100000"]
     securityContext:
       allowPrivilegeEscalation: false
