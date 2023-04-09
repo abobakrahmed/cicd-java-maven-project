@@ -20,6 +20,8 @@ spec:
   - name: docker
     image: docker:latest
     command: ["sleep", "100000"]
+    securityContext:
+      allowPrivilegeEscalation: false
 '''
         }
   }
@@ -75,7 +77,7 @@ spec:
       steps {
         container ('docker') {
           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-          sh 'systemctl start docker'   
+          sh 'dockerd'   
           sh "docker build -t abobakr/cicd-java-maven ."
           sh "docker push abobakr/cicd-java-maven"
         }
