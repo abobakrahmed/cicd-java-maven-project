@@ -17,8 +17,20 @@ spec:
     command: ["sleep", "100000"]
     securityContext:
       allowPrivilegeEscalation: false
-  - name: docker
-    image: ubuntu:latest
+  - name: kaniko
+    image: gcr.io/kaniko-project/executor:v1.6.0-debug
+    args: ["--dockerfile=/workspace/Dockerfile", "--context=dir://workspace", "--destination=gcr.io/my-project/my-image"]
+    volumeMounts:
+      - name: kaniko-secret
+        mountPath: /secret
+      - name: workspace
+        mountPath: /workspace
+  volumes:
+    - name: kaniko-secret
+      secret:
+        secretName: regcred
+    - name: workspace
+      emptyDir: {}
     command: ["sleep", "100000"]
     securityContext:
       allowPrivilegeEscalation: false
@@ -75,7 +87,7 @@ spec:
 
     stage("Build & Push Docker Image") {
       steps {
-        container ('docker') {
+        container ('kaniko') {
           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'   
           sh "docker build -t abobakr/cicd-java-maven ."
           sh "docker push abobakr/cicd-java-maven"
