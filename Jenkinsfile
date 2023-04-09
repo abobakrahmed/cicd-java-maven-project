@@ -15,7 +15,7 @@ spec:
   - name: maven
     image: jenkins/jnlp-agent-maven:latest
     command: ["/bin/sh"]
-    args: ["-c", "while true; apt install default-jdk; sleep 100000;do"]
+    args: ["-c", "apt install default-jdk", "sleep 100000"]
     securityContext:
       allowPrivilegeEscalation: false
 '''
