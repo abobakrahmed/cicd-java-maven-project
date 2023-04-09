@@ -1,6 +1,31 @@
 pipeline {
      
-  agent any 
+  agent {
+        kubernetes {
+            yaml '''
+apiVersion: v1
+kind: Pod
+metadata:
+  name: maven-staging
+  namespace: jenkins-new
+spec:
+  securityContext:
+    runAsUser: 0
+  containers:
+  - name: maven
+    image: jenkins/jnlp-agent-maven:jdk11
+    command: ["sleep", "100000"]
+    securityContext:
+      allowPrivilegeEscalation: false
+'''
+        }
+  }
+     //     args: ["-c", "apt install -y default-jdk", "sleep 100000"]
+//   agent {
+//       kubernetes {
+//           inheritFrom 'maven'
+//       }
+//   }
   environment {
     DOCKERHUB_CREDENTIALS=credentials('dockerhub') // Create a credentials in jenkins using your dockerhub username and token from https://hub.docker.com/settings/security
   }
@@ -17,7 +42,7 @@ pipeline {
 
     stage("Maven Build") {
       steps {   
-        script {
+        container ('jnlp') {
           sh "mvn clean install -T 1C" // -T 1C is to make build faster using multithreading
         }
       }
@@ -25,12 +50,14 @@ pipeline {
 
     stage("Run SonarQube Analysis") {
        steps {
+         container ('jnlp') {
            script {
            withSonarQubeEnv('Sonarqube') {
             sh 'mvn clean package sonar:sonar -Dsonar.profile="Sonar way -Dsonar.host.url=http://3.127.136.150:9000 --Dsonar.projectKey=cicd-maven-staging"'
                 }
               }
            }
+        }
     }
        
 //     stage("Quality Gate") {
@@ -43,7 +70,7 @@ pipeline {
 
     stage("Build & Push Docker Image") {
       steps {
-        script {
+        container ('jnlp') {
           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
           sh "docker build -t abobakr/cicd-java-maven ."
           sh "docker push abobakr/cicd-java-maven"
@@ -53,7 +80,7 @@ pipeline {
 
     stage("Apply the Kubernetes files") {
       steps {
-        script {
+        container ('jnlp') {
           sh "kubectl apply -f kubernetes/ "
         }
       }
