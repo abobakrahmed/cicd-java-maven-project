@@ -62,13 +62,10 @@ spec:
        
     stage("Quality Gate") {
        steps {  
-          timeout(time: 10, unit: 'MINS') {
-              def qg = waitForQualityGate()
-              if (qg.status != 'OK') {
-                  error "Pipeline aborted due to quality gate failure: ${qg.status}"
+          timeout(time: 10, unit: 'MINUTES') {
+                  waitForQualityGate abortPipeline: true
                }
-            }
-        }
+          }
      }    
 
     stage("Build & Push Docker Image") {
