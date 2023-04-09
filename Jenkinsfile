@@ -18,7 +18,7 @@ spec:
     securityContext:
       allowPrivilegeEscalation: false
   - name: docker
-    image: docker:latest
+    image: ubuntu:latest
     command: ["sleep", "100000"]
     securityContext:
       allowPrivilegeEscalation: false
@@ -76,8 +76,7 @@ spec:
     stage("Build & Push Docker Image") {
       steps {
         container ('docker') {
-          sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-          sh 'dockerd'   
+          sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'   
           sh "docker build -t abobakr/cicd-java-maven ."
           sh "docker push abobakr/cicd-java-maven"
         }
