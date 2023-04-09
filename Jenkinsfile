@@ -1,6 +1,10 @@
 pipeline {
      
-  agent any 
+  agent {
+      kubernetes {
+          inheritFrom 'maven'
+      }
+  }
   environment {
     DOCKERHUB_CREDENTIALS=credentials('dockerhub') // Create a credentials in jenkins using your dockerhub username and token from https://hub.docker.com/settings/security
   }
@@ -9,7 +13,7 @@ pipeline {
 
     stage("Git Checkout") {
       steps {
-        container ("default") {
+        script {
            sh "git clone https://github.com/abobakrahmed/cicd-java-maven-project.git"            
         }
       }
@@ -17,7 +21,7 @@ pipeline {
 
     stage("Maven Build") {
       steps {   
-        container ("default") {
+        container ("maven") {
           sh "mvn clean install -T 1C" // -T 1C is to make build faster using multithreading
         }
       }
