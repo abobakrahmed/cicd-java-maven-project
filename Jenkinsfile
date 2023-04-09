@@ -51,8 +51,8 @@ spec:
       steps {
         container ('maven') {
           script {
-          withSonarQubeEnv(credentialsId: 'Sonarqube', installationName: 'Sonarqube') {
-           sh 'mvn clean package sonar:sonar -Dsonar.profile="Sonar way"'
+          withSonarQubeEnv('Sonarqube') {
+           sh 'mvn clean package sonar:sonar -Dsonar.profile="Sonar way -Dsonar.host.url=http://3.127.136.150:9000"'
           }
           try {
             timeout(time: 5, unit: 'MINUTES') { // pipeline will be killed after a timeout
