@@ -14,7 +14,8 @@ spec:
   containers:
   - name: maven
     image: jenkins/jnlp-agent-maven:latest
-    command: ["sleep", "100000", "apt install default-jdk"]
+    args: ['/bin/sh -c 'apt install default-jdk'']
+    command: ["sleep", "100000"]
     securityContext:
       allowPrivilegeEscalation: false
 '''
