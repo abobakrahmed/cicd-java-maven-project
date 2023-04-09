@@ -31,9 +31,6 @@ spec:
         secretName: regcred
     - name: workspace
       emptyDir: {}
-    command: ["sleep", "100000"]
-    securityContext:
-      allowPrivilegeEscalation: false
 '''
         }
   }
