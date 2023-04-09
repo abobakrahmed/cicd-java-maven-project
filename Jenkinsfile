@@ -2,7 +2,7 @@ pipeline {
      
   agent {
       kubernetes {
-          inheritFrom 'default'
+          inheritFrom 'maven'
       }
   }
   environment {
@@ -21,7 +21,7 @@ pipeline {
 
     stage("Maven Build") {
       steps {   
-        container ("maven") {
+        container ("jnlp") {
           sh "mvn clean install -T 1C" // -T 1C is to make build faster using multithreading
         }
       }
