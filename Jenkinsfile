@@ -19,18 +19,6 @@ spec:
       allowPrivilegeEscalation: false
   - name: kaniko
     image: gcr.io/kaniko-project/executor:v1.6.0-debug
-    args: ["--dockerfile=/workspace/Dockerfile", "--context=dir://workspace", "--destination=gcr.io/my-project/my-image"]
-    volumeMounts:
-      - name: kaniko-secret
-        mountPath: /secret
-      - name: workspace
-        mountPath: /workspace
-  volumes:
-    - name: kaniko-secret
-      secret:
-        secretName: regcred
-    - name: workspace
-      emptyDir: {}
 '''
         }
   }
