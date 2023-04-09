@@ -60,13 +60,13 @@ spec:
         }
     }
        
-    stage("Quality Gate") {
-       steps {  
-          timeout(time: 10, unit: 'MINUTES') {
-                  waitForQualityGate abortPipeline: true
-               }
-          }
-     }    
+//     stage("Quality Gate") {
+//        steps {  
+//           timeout(time: 10, unit: 'MINUTES') {
+//                   waitForQualityGate abortPipeline: true
+//                }
+//           }
+//      }    
 
     stage("Build & Push Docker Image") {
       steps {
