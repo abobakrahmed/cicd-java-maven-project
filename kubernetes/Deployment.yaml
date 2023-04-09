@@ -16,7 +16,7 @@ spec:
         app: cicd-java-maven
     spec:
       containers:
-        - image: dash18/cicd-java-maven
+        - image: abobakr/cicd-java-maven
           imagePullPolicy: Always
           name: cicd-java-maven
           ports:
