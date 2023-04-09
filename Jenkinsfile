@@ -13,15 +13,14 @@ spec:
     runAsUser: 0
   containers:
   - name: maven
-    image: jenkins/jnlp-agent-maven:latest
-    command: ["/bin/sh"]
-    args: ["-c", "apt install -y default-jdk", "sleep 100000"]
+    image: jenkins/jnlp-agent-maven:jdk11
+    command: ["sleep", "100000"]
     securityContext:
       allowPrivilegeEscalation: false
 '''
         }
   }
-     //     args: ["/bin/sh -c 'apt install default-jdk'"]
+     //     args: ["-c", "apt install -y default-jdk", "sleep 100000"]
 //   agent {
 //       kubernetes {
 //           inheritFrom 'maven'
