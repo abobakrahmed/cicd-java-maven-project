@@ -59,7 +59,8 @@ spec:
            }
         }
      }
-     stage("Quality Gate"){
+       
+    stage("Quality Gate") {
           timeout(time: 10, unit: 'MINS') {
               def qg = waitForQualityGate()
               if (qg.status != 'OK') {
@@ -86,13 +87,4 @@ spec:
       }
     }
   }
-//   post {
-//     always {
-//       script {
-//         if (currentBuild.currentResult == 'FAILURE') {
-//           step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: "bakkorahmed5@gmail.com", sendToIndividuals: true])
-//         }
-//       }
-//     }
-//   }
 }
