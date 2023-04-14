@@ -20,7 +20,15 @@ spec:
        allowPrivilegeEscalation: false
   - name: kaniko
     image: gcr.io/kaniko-project/executor:latest
-    command: ["sleep", "100000"]
+    volumeMounts:
+      - name: kaniko-secret
+        mountPath: /kaniko/.docker
+  restartPolicy: Never
+  volumes:
+  - name: kaniko-secret
+    secret:
+      secretName: reg-credentials     
+
 
 '''
         }
