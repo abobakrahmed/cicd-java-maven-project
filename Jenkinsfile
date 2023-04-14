@@ -90,7 +90,7 @@ spec:
 
     stage("Apply the Kubernetes files") {
       steps {
-          script {
+        script {
           sh "kubectl apply -f kubernetes/ "
         }
       }
