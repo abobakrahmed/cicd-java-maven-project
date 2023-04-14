@@ -14,14 +14,16 @@ spec:
   containers:
   - name: maven
     image: jenkins/jnlp-agent-maven:jdk11
+    imagePullPolicy: Always
     command: ["sleep", "100000"]
     securityContext:
-      allowPrivilegeEscalation: false
+        allowPrivilegeEscalation: false 
   - name: docker
     image: docker:dind
+    imagePullPolicy: Always
     command: ["dockerd", "--host", "tcp://127.0.0.1:2375"]
     securityContext:
-      allowPrivilegeEscalatio: false   
+        privileged: true 
 '''
         }
   }
