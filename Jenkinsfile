@@ -78,9 +78,8 @@ spec:
     stage("Build & Push Docker Image") {
       steps {
         container ('docker') {
+          sh 'su - root'
           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'   
-          sh "whoami"
-          sh "chmod 757 /var/run/docker.sock"
           sh "sudo docker build -t abobakr/cicd-java-maven ."
           sh "sudo docker push abobakr/cicd-java-maven"
         }
