@@ -23,7 +23,8 @@ spec:
     imagePullPolicy: Always
     command: ["dockerd", "--host", "tcp://127.0.0.1:2375"]
     securityContext:
-      privileged: true 
+      allowPrivilegeEscalation: false
+      runAsUser: 0
 
 '''
         }
