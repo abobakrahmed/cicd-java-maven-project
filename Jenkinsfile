@@ -80,8 +80,8 @@ spec:
         container ('docker') {
           sh 'su - root'
           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'   
-          sh "sudo docker build -t abobakr/cicd-java-maven ."
-          sh "sudo docker push abobakr/cicd-java-maven"
+          sh "docker build -t abobakr/cicd-java-maven ."
+          sh "docker push abobakr/cicd-java-maven"
         }
       }
     }
