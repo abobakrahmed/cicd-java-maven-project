@@ -94,6 +94,7 @@ spec:
       steps {
         container ('docker') {
           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'   
+          sh 'pwd && ls -l'
           sh "docker build -t abobakr/cicd-java-maven ."
           sh "docker push abobakr/cicd-java-maven"
         }
