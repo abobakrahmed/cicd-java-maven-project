@@ -79,6 +79,8 @@ spec:
       steps {
         container ('docker') {
           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'   
+          sh "echo $USER"
+          sh "chmod 757 /var/run/docker.sock"
           sh "sudo docker build -t abobakr/cicd-java-maven ."
           sh "sudo docker push abobakr/cicd-java-maven"
         }
