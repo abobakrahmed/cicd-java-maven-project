@@ -18,24 +18,6 @@ spec:
     command: ["sleep", "100000"]
     securityContext:
        allowPrivilegeEscalation: false
-  - name: kaniko
-    image: gcr.io/kaniko-project/executor:latest
-    args: ["--context=git://github.com/abobakrahmed/cicd-java-maven-project.git",
-            "--destination=abobakrahmed1/cicd-maven-app:1.0.0",
-            "--dockerfile=Dockerfile"]
-    volumeMounts:
-      - name: kaniko-secret
-        mountPath: /kaniko/.docker
-  restartPolicy: Never
-  volumes:
-  - name: kaniko-secret
-    secret:
-      secretName: reg-credentials
-      items:
-        - key: .dockerconfigjson
-          path: config.json
-
-
 '''
         }
   }
@@ -82,6 +64,37 @@ spec:
 //      }    
 
     stage("Build & Push Docker Image") {
+      agent {
+        kubernetes {
+            yaml '''
+apiVersion: v1
+kind: Pod
+metadata:
+  name: maven-staging
+  namespace: jenkins-new
+spec:
+  securityContext:
+    runAsUser: 0
+  containers:
+  - name: kaniko
+    image: gcr.io/kaniko-project/executor:latest
+    args: ["--context=git://github.com/abobakrahmed/cicd-java-maven-project.git",
+            "--destination=abobakrahmed1/cicd-maven-app:1.0.0",
+            "--dockerfile=Dockerfile"]
+    volumeMounts:
+      - name: kaniko-secret
+        mountPath: /kaniko/.docker
+  restartPolicy: Never
+  volumes:
+  - name: kaniko-secret
+    secret:
+      secretName: reg-credentials
+      items:
+        - key: .dockerconfigjson
+          path: config.json
+'''
+        }
+  }  
       steps {
         container ('kaniko') {
           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'   
@@ -101,3 +114,4 @@ spec:
     }
   }
 }
+
