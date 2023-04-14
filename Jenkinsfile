@@ -21,7 +21,7 @@ spec:
     image: docker:dind
     command: ["dockerd", "--host", "tcp://127.0.0.1:2375"]
     securityContext:
-      allowPrivilegeEscalatio: true   
+      allowPrivilegeEscalatio: false   
 '''
         }
   }
