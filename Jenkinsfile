@@ -18,6 +18,23 @@ spec:
     command: ["sleep", "100000"]
     securityContext:
        allowPrivilegeEscalation: false
+    volumeMounts:
+      - name: image-volume
+        mountPath: /opt/image
+        subPath: image   
+  - name: docker
+    image: docker:dind
+    imagePullPolicy: Always
+    command: ["dockerd", "--host", "tcp://127.0.0.1:2375"]
+    securityContext:
+      privileged: true 
+    volumeMounts:
+      - name: image-volume
+        mountPath: /opt/image
+        subPath: image
+  volumes:
+      - name: image-volume
+        emptyDir: {}   
 
 '''
         }
@@ -72,7 +89,7 @@ spec:
 
     stage("Build & Push Docker Image") {
       steps {
-        container ('maven') {
+        container ('docker') {
           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'   
           sh "docker build -t abobakr/cicd-java-maven ."
           sh "docker push abobakr/cicd-java-maven"
