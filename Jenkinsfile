@@ -19,7 +19,7 @@ spec:
     securityContext:
         allowPrivilegeEscalation: false 
   - name: docker
-    image: docker:dind
+    image: dind-rootless
     imagePullPolicy: Always
     command: ["dockerd", "--host", "tcp://127.0.0.1:2375"]
     securityContext:
@@ -78,7 +78,6 @@ spec:
     stage("Build & Push Docker Image") {
       steps {
         container ('docker') {
-          sh 'su - root'
           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'   
           sh "docker build -t abobakr/cicd-java-maven ."
           sh "docker push abobakr/cicd-java-maven"
