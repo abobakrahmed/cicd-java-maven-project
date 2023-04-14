@@ -14,9 +14,14 @@ spec:
   containers:
   - name: maven
     image: jenkins/jnlp-agent-maven:jdk11
-    command: ["-c","docker run -v /var/run/docker.sock:/var/run/docker.sock -ti docker"]
+    command: ["sleep", "100000"]
     securityContext:
       allowPrivilegeEscalation: false
+  - name: docker
+    image: docker:dind
+    command: ["dockerd", "--host", "tcp://127.0.0.1:2375"]
+    securityContext:
+      allowPrivilegeEscalatio: true   
 '''
         }
   }
@@ -70,7 +75,7 @@ spec:
 
     stage("Build & Push Docker Image") {
       steps {
-        container ('maven') {
+        container ('docker') {
           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'   
           sh "docker build -t abobakr/cicd-java-maven ."
           sh "docker push abobakr/cicd-java-maven"
