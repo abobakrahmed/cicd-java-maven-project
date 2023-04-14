@@ -20,17 +20,6 @@ spec:
        allowPrivilegeEscalation: false
   - name: kaniko
     image: gcr.io/kaniko-project/executor:latest
-    volumeMounts:
-      - name: kaniko-secret
-        mountPath: /kaniko/.docker
-  restartPolicy: Never
-  volumes:
-    - name: kaniko-secret
-      secret:
-        secretName: reg-credentials
-        items:
-          - key: .dockerconfigjson
-            path: config.json  
 
 '''
         }
