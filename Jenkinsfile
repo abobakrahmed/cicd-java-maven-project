@@ -15,8 +15,7 @@ spec:
   - name: maven
     image: jenkins/jnlp-agent-maven:jdk11
     imagePullPolicy: Always
-    command: ["sleep"] 
-    args: ["100000"]
+    command: ["sleep", "100000"] 
     securityContext:
        allowPrivilegeEscalation: false
   - name: kaniko
