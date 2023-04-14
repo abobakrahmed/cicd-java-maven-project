@@ -22,7 +22,8 @@ spec:
     image: docker:dind
     imagePullPolicy: Always
     command: ["dockerd", "--host", "tcp://127.0.0.1:2375"]
-    securityContext: 
+    securityContext:
+      privileged: true 
       allowPrivilegeEscalation: true
       runAsUser: 0
 
