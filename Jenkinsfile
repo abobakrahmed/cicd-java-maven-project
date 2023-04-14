@@ -24,7 +24,7 @@ spec:
     command: ["sleep"] 
     args: ["10000000"]
     volumeMounts:
-    - name: kaniko-secret
+      - name: kaniko-secret
         mountPath: /kaniko/.docker
   restartPolicy: Never
   volumes:
