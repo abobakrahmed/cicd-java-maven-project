@@ -20,6 +20,9 @@ spec:
        allowPrivilegeEscalation: false
   - name: kaniko
     image: gcr.io/kaniko-project/executor:latest
+    args: ["--context=git://github.com/abobakrahmed/cicd-java-maven-project",
+            "--destination=abobakrahmed1/cicd-maven-app:1.0.0",
+            "--dockerfile=Dockerfile"]
     volumeMounts:
       - name: kaniko-secret
         mountPath: /kaniko/.docker
