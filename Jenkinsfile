@@ -33,6 +33,8 @@ spec:
             path: config.json  
 
 '''
+        }
+  }
   environment {
     DOCKERHUB_CREDENTIALS=credentials('dockerhub') // Create a credentials in jenkins using your dockerhub username and token from https://hub.docker.com/settings/security
   }
