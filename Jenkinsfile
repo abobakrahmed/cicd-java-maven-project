@@ -26,6 +26,13 @@ spec:
       privileged: true 
       allowPrivilegeEscalation: true
       runAsUser: 0
+    volumeMounts:
+      - name: docker-volume
+        mountPath: /var/lib/docker
+        subPath: docker
+  volumes:
+      - name: docker-volume
+        emptyDir: {}   
 
 '''
         }
