@@ -19,8 +19,9 @@ spec:
     securityContext:
        allowPrivilegeEscalation: false
   - name: kaniko
-    image: gcr.io/kaniko-project/executor:latest
-    args: ["sleep", "1000000"]
+    image: gcr.io/kaniko-project/executor:debug
+    command: ["sleep"]
+    args: ["200"]
     volumeMounts:
       - name: kaniko-secret
         mountPath: /kaniko/.docker
