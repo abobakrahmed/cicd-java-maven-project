@@ -29,6 +29,9 @@ spec:
     securityContext:
       privileged: true 
     volumeMounts:
+      - name: docker-storage
+        mountPath: /var/lib/docker
+        subPath: docker
       - name: image-volume
         mountPath: /opt/image
         subPath: image
