@@ -19,7 +19,7 @@ spec:
     securityContext:
         allowPrivilegeEscalation: false 
   - name: docker
-    image: dind-rootless
+    image: docker:dind-rootless
     imagePullPolicy: Always
     command: ["dockerd", "--host", "tcp://127.0.0.1:2375"]
     securityContext:
