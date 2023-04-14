@@ -18,31 +18,21 @@ spec:
     command: ["sleep", "100000"]
     securityContext:
        allowPrivilegeEscalation: false
-  - name: docker
-    image: docker:dind
-    imagePullPolicy: Always
-    command: ["dockerd", "--host", "tcp://127.0.0.1:2375"]
-    securityContext:
-      privileged: true 
-      allowPrivilegeEscalation: true
-      runAsUser: 0
+  - name: kaniko
+    image: gcr.io/kaniko-project/executor:latest
     volumeMounts:
-      - name: docker-volume
-        mountPath: /var/lib/docker
-        subPath: docker
+      - name: kaniko-secret
+        mountPath: /kaniko/.docker
+  restartPolicy: Never
   volumes:
-      - name: docker-volume
-        emptyDir: {}   
+    - name: kaniko-secret
+      secret:
+        secretName: reg-credentials
+        items:
+          - key: .dockerconfigjson
+            path: config.json  
 
 '''
-        }
-  }
-     //     args: ["-c", "apt install -y default-jdk", "sleep 100000"]
-//   agent {
-//       kubernetes {
-//           inheritFrom 'maven'
-//       }
-//   }
   environment {
     DOCKERHUB_CREDENTIALS=credentials('dockerhub') // Create a credentials in jenkins using your dockerhub username and token from https://hub.docker.com/settings/security
   }
@@ -87,7 +77,7 @@ spec:
 
     stage("Build & Push Docker Image") {
       steps {
-        container ('docker') {
+        container ('kaniko') {
           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'   
           sh 'pwd && ls -l'
           sh "docker build ."
