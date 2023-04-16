@@ -38,7 +38,7 @@ spec:
   }
   environment {
     DOCKERHUB_CREDENTIALS=credentials('dockerhub') // Create a credentials in jenkins using your dockerhub username and token from https://hub.docker.com/settings/security
-    KUBECONFIG_CREDENTIAL_ID=credentials('kubeconfig')   
+    KUBECONFIG_CREDENTIAL_ID = 'kubeconfig'   
   }
   
   stages {
