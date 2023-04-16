@@ -90,7 +90,8 @@ spec:
 
     stage("Apply the Kubernetes files") {
       steps {
-        withKubeConfig([credentialsId: 'arn:aws:eks:us-east-2:856987749590:cluster/atos-eks-8YEeTWA5', serverUrl: 'https://A9D7AA7B94224AE940E50111852361C1.yl4.us-east-2.eks.amazonaws.com']) {
+        srcipy {
+          sh "ipaddr"   
           sh "kubectl apply -f kubernetes/ "
         }
       }
