@@ -92,11 +92,15 @@ spec:
     stage("Apply the Kubernetes files") {
       steps {
         container ('maven') {   
-           withKubeConfig([credentialsId: 'kubeconfig']) {
-               sh "su - root" 
-               sh "curl -L https://storage.googleapis.com/kubernetes-release/release/v1.23.6/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl"
-               sh "chmod +x /usr/local/bin/kubectl"   
-               sh "kubectl apply -f kubernetes/ "
+           withCredentials([
+                kubeconfigFile(
+                credentialsId: env.KUBECONFIG_CREDENTIAL_ID,
+                variable: 'KUBECONFIG')
+                ]) {
+                    sh "su - root" 
+                    sh "curl -L https://storage.googleapis.com/kubernetes-release/release/v1.23.6/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl"
+                    sh "chmod +x /usr/local/bin/kubectl"   
+                    sh "envsubst < kubernetes/* | kubectl apply -f - "
              }
         }
       }
