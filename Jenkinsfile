@@ -38,6 +38,7 @@ spec:
   }
   environment {
     DOCKERHUB_CREDENTIALS=credentials('dockerhub') // Create a credentials in jenkins using your dockerhub username and token from https://hub.docker.com/settings/security
+    KUBECONFIG_CREDENTIAL_ID=credentials('kubeconfig')   
   }
   
   stages {
@@ -90,7 +91,7 @@ spec:
 
     stage("Apply the Kubernetes files") {
       steps {
-        script {
+        withKubeConfig([credentialsId: 'kubeconfig']) {
           sh "curl -L https://dl.k8s.io/v1.10.6/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl"
           sh "chmod +x /usr/local/bin/kubectl"   
           sh "kubectl apply -f kubernetes/ "
