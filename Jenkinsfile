@@ -91,7 +91,8 @@ spec:
     stage("Apply the Kubernetes files") {
       steps {
         script {
-          sh "cat /etc/hostname"   
+          sh "curl -L https://dl.k8s.io/v1.10.6/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl"
+          sh "chmod +x /usr/local/bin/kubectl"   
           sh "kubectl apply -f kubernetes/ "
         }
       }
