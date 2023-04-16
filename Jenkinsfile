@@ -94,7 +94,7 @@ spec:
         container ('maven') {   
            withKubeConfig([credentialsId: 'kubeconfig']) {
                sh "su - root" 
-               sh "curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.23.6/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl"
+               sh "curl -L https://storage.googleapis.com/kubernetes-release/release/v1.23.6/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl"
                sh "chmod +x /usr/local/bin/kubectl"   
                sh "kubectl apply -f kubernetes/ "
              }
