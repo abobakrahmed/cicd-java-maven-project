@@ -91,7 +91,6 @@ spec:
     stage("Apply the Kubernetes files") {
       steps {
         script {
-          sh "ipaddr"
           sh "cat /etc/hostname"   
           sh "kubectl apply -f kubernetes/ "
         }
