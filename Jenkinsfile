@@ -97,14 +97,14 @@ spec:
 
     stage("Apply the Kubernetes files") {
       steps {
-        container ('maven') {   
+        script {   
            withKubeCredentials(kubectlCredentials: [[caCertificate: '', 
                clusterName: 'arn:aws:eks:us-east-2:856987749590:cluster/atos-eks-8YEeTWA5', contextName: '', credentialsId: 'TestKubernetes', namespace: 'kube-system', 
                serverUrl: 'https://A9D7AA7B94224AE940E50111852361C1.yl4.us-east-2.eks.amazonaws.com']]) {
                     sh "su - root" 
                     sh "curl -L https://storage.googleapis.com/kubernetes-release/release/v1.23.6/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl"
                     sh "chmod +x /usr/local/bin/kubectl"   
-                    sh "pwd && ls -l && cat kubernetes/Deployment.yaml | envsubst - | kubectl apply -f -"
+                    sh "envsubst < kubernetes/Deployment.yaml | kubectl apply -f -"
              }
         }
       }
