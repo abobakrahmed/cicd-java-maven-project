@@ -39,6 +39,11 @@ spec:
   environment {
     DOCKERHUB_CREDENTIALS=credentials('dockerhub') // Create a credentials in jenkins using your dockerhub username and token from https://hub.docker.com/settings/security
     KUBECONFIG_CREDENTIAL_ID = 'kubeconfig'   
+    REGISTRY = 'docker.io'
+        // need to replace by yourself dockerhub namespace
+    DOCKERHUB_NAMESPACE = 'abobakrahmed1'
+    APP_NAME = 'devops-maven-CICD'
+    BRANCH_NAME = 'staging' 
   }
   
   stages {
@@ -83,7 +88,7 @@ spec:
       steps {
         container ('kaniko') {
           sh '''
-            /kaniko/executor --context `pwd` --destination=abobakrahmed1/cicd-maven-app:1.0.0
+            /kaniko/executor --context `pwd` --destination=$APP_NAME/cicd-maven-app-$BRANCH_NAME:1.0.0
         ''' 
         }
       }
