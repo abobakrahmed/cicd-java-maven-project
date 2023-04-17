@@ -41,10 +41,10 @@ spec:
     KUBECONFIG_CREDENTIAL_ID = 'kubeconfig'   
     REGISTRY = 'docker.io'
         // need to replace by yourself dockerhub namespace
-    DOCKERHUB_NAMESPACE = 'Docker Hub Namespace'
-    APP_NAME = 'devops-maven-app'
+    DOCKERHUB_NAMESPACE = 'abobakrahmed1'
+    APP_NAME = 'cicd-maven-app'
     BRANCH_NAME = 'staging' 
-    PROJECT_NAME = "cicd-java-maven"
+    PROJECT_NAME = "devops-CICD-maven"
   }
   
   stages {
@@ -89,7 +89,7 @@ spec:
       steps {
         container ('kaniko') {
           sh '''
-            /kaniko/executor --context `pwd` --destination=$APP_NAME/cicd-maven-app-$BRANCH_NAME:1.0.0
+            /kaniko/executor --context `pwd` --destination=$APP_NAME/$BRANCH_NAME:1.0.0-$BUILD_NUMBER
         ''' 
         }
       }
