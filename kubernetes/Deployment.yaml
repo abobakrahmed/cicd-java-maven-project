@@ -17,6 +17,7 @@ spec:
     spec:
       containers:
         - image: abobakr/cicd-java-maven
+          image: $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:cicd-maven-app-$BRANCH_NAME-$BUILD_NUMBER
           imagePullPolicy: Always
           name: cicd-java-maven
           ports:
