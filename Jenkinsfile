@@ -97,7 +97,7 @@ spec:
 
     stage("Apply the Kubernetes files") {
       steps {
-        script {   
+        container ('maven') {   
            withKubeCredentials(kubectlCredentials: [[caCertificate: '', 
                clusterName: 'arn:aws:eks:us-east-2:856987749590:cluster/atos-eks-8YEeTWA5', contextName: '', credentialsId: 'TestKubernetes', namespace: 'kube-system', 
                serverUrl: 'https://A9D7AA7B94224AE940E50111852361C1.yl4.us-east-2.eks.amazonaws.com']]) {
