@@ -4,7 +4,7 @@ metadata:
   labels:
     app: cicd-java-maven
   name: cicd-java-maven
-  namespace: staging
+  namespace: $PROJECT_NAME
 spec:
   replicas: 1
   selector:
@@ -33,3 +33,22 @@ spec:
               memory: 1Gi
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
+          
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: cicd-java-maven
+  name: cicd-java-maven
+  namespace: $PROJECT_NAME
+spec:
+  ports:
+    - name: cicd-java-maven
+      port: 80
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: cicd-java-maven
+  type: ClusterIP
+
