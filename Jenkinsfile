@@ -41,9 +41,10 @@ spec:
     KUBECONFIG_CREDENTIAL_ID = 'kubeconfig'   
     REGISTRY = 'docker.io'
         // need to replace by yourself dockerhub namespace
-    DOCKERHUB_NAMESPACE = 'abobakrahmed1'
-    APP_NAME = 'devops-maven-CICD'
+    DOCKERHUB_NAMESPACE = 'Docker Hub Namespace'
+    APP_NAME = 'devops-maven-app'
     BRANCH_NAME = 'staging' 
+    PROJECT_NAME = "cicd-java-maven"
   }
   
   stages {
