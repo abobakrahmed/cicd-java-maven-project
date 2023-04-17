@@ -93,12 +93,12 @@ spec:
       steps {
         container ('maven') {   
            withKubeCredentials(kubectlCredentials: [[caCertificate: '', 
-               clusterName: 'arn:aws:eks:ca-central-1:749338631975:cluster/eksPoc', contextName: '', credentialsId: 'TestKubernetes', namespace: 'kube-system', 
-               serverUrl: 'https://5E95D6E384E16CA6F220DE5F93348A36.yl4.ca-central-1.eks.amazonaws.com']]) {
+               clusterName: 'arn:aws:eks:us-east-2:856987749590:cluster/atos-eks-8YEeTWA5', contextName: '', credentialsId: 'TestKubernetes', namespace: 'kube-system', 
+               serverUrl: 'https://A9D7AA7B94224AE940E50111852361C1.yl4.us-east-2.eks.amazonaws.com']]) {
                     sh "su - root" 
                     sh "curl -L https://storage.googleapis.com/kubernetes-release/release/v1.23.6/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl"
                     sh "chmod +x /usr/local/bin/kubectl"   
-                    sh "envsubst < kubernetes/ | kubectl apply -f - "
+                    sh "kubectl apply -f kubernetes/ "
              }
         }
       }
