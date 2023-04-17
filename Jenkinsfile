@@ -44,7 +44,7 @@ spec:
     DOCKERHUB_NAMESPACE = 'abobakrahmed1'
     APP_NAME = 'cicd-maven-app'
     BRANCH_NAME = 'staging' 
-    PROJECT_NAME = "devops-CICD-maven"
+    PROJECT_NAME = "staging"
   }
   
   stages {
