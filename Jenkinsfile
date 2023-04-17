@@ -104,7 +104,7 @@ spec:
                     sh "su - root" 
                     sh "curl -L https://storage.googleapis.com/kubernetes-release/release/v1.23.6/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl"
                     sh "chmod +x /usr/local/bin/kubectl"   
-                    sh "cat kubernetes/Deployment.yaml | envsubst - | kubectl apply -f -"
+                    sh "pwd && ls -l && cat kubernetes/Deployment.yaml | envsubst - | kubectl apply -f -"
              }
         }
       }
