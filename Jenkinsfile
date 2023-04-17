@@ -89,7 +89,7 @@ spec:
       steps {
         container ('kaniko') {
           sh '''
-            /kaniko/executor --context `pwd` --destination=$APP_NAME/$BRANCH_NAME:1.0.0-$BUILD_NUMBER
+            /kaniko/executor --context `pwd` --destination=$DOCKERHUB_NAMESPACE/$APP_NAME:$BRANCH_NAME-$BUILD_NUMBER
         ''' 
         }
       }
